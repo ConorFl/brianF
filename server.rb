@@ -1,6 +1,7 @@
 require 'sinatra'
 require 'sinatra/namespace'
 require 'data_mapper'
+require 'dm-sqlite-adapter'
 require_relative 'helpers.rb'
 enable :sessions
 
