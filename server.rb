@@ -1,7 +1,7 @@
 require 'sinatra'
 require 'sinatra/namespace'
 require 'data_mapper'
-require 'dm-sqlite-adapter'
+#helpers.rb is blank :(
 require_relative 'helpers.rb'
 enable :sessions
 
