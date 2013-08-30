@@ -14,5 +14,5 @@ Future plans
 - Change design after getting feedback (currently, it's raw Bootstrap).
 - Admin login is currently hardcoded to a route.
 - I want to make his resume downloadable (.pdf, .docx, etc.).  Also, right now there's not much functionality in editing the resume page, so I'm considering implement some sort of markdown system.
-- Since all the content needs to be editable by the admin, it's all stored in a db.  However, given how infrequently this content will change, it feels a little excessive to be hitting the database in one form or another for every request.  My initial search for using ruby to edit erb/html files wasn't very fruitful.  I thought about putting together some kinda messy Regex script, but there's gotta be a more elegant solution.
+- Since all the content needs to be editable by the admin, it's all stored in a db.  However, given how infrequently this content will change, it feels a little excessive to be hitting the database in one form or another for every request.  My initial search for how to edit erb/html files using Ruby wasn't very fruitful.  I thought about putting together some kinda messy Regex script, but there's gotta be a more elegant solution.
 - Take the `<br><br><br><br>....` out of layout.erb.
