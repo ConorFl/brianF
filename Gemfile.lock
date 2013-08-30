@@ -71,5 +71,6 @@ PLATFORMS
 DEPENDENCIES
   data_mapper
   dm-sqlite-adapter
+  do_sqlite3 (= 0.10.13)
   sinatra (= 1.1.0)
   sinatra-namespace
