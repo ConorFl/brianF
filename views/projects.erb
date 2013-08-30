@@ -7,12 +7,42 @@
 <!-- TAGS LIST SHOULD UPDATE DYNAMICALLY -->
 <ul class="unstyled inline project-techs">
 	<li class="active-tech"><a href="#">all</a></li>
-	<li class="inactive-tech"><a href="#">adobe</li>
-	<li class="inactive-tech"><a href="#">finalcut</a></li>
-	<li class="inactive-tech"><a href="#">editting</a></li>
+	<% if @tags %>
+		<% @tags.each do |tag| %>
+			<li class="inactive-tech"><a href="#"><%= tag %></a></li>
+		<% end %>
+	<% end %>
 </ul>
 <br>
-
+<ul class="media-list">
+	<% @projects.each do |proj| %>
+	<li class="media all <%= proj.tags.gsub(',','') %>">
+		<a class="pull-left" href="projects/<%= proj.id %>/edit" >
+			<!-- Look into changing the size of the image to avoid gsub -->
+			<img class="media-object" src=<%= proj.img_url.gsub('/0.jpg','/1.jpg') %> >
+			<!-- Add 'watch' link here -->
+		</a>
+		<div class="media-body">
+			<h3 class="media-heading">
+				<a href="projects/<%= proj.id %>/edit" ><%= proj.title %></a>
+				<form action="projects/<%= proj.id %>" method="post">
+					<input type="hidden" name="_method" value="delete" />
+					<input type="submit" value="Delete" class="btn btn-danger pull-right">
+				</form>
+			</h3>
+			<%= proj.description %>
+			<div>
+				<% if proj.tags %>
+					<% proj.tags.split(',').each do |tag| %>
+					<span class="label label-info"><%= tag %></span>
+					<% end %>
+				<% end %>	
+			</div>
+		</div>
+	</li>
+	<% end %>
+</ul>
+<!-- 
 
 <ul class="media-list">
 	<li class="media all adobe photoshop" data-src='youtube.com'>
@@ -69,7 +99,7 @@
 			</div>
 		</div>
 	</li>
-</ul>
+</ul> -->
 <script>
 	$('.project-techs').on('click','li',function(e){
 		e.preventDefault();
@@ -84,10 +114,12 @@
 var toggleVideos = function(that){
 			//Toggle active/inactive style on links.
 			$('.active-tech').removeClass('active-tech').addClass('inactive-tech');
+			console.log("active-class being added to "+that.text())
 			that.addClass('active-tech');
-			//Toggle videos displayed.
+			// Toggle videos displayed.
 			$('.media:visible').fadeOut(function(){
-				$("."+that.text()).fadeIn();
+				console.log("fadin in ."+that.text().replace(" "," ."))
+				$("."+that.text().replace(" ",".")).fadeIn();
 			});		
 		}
 		var showLightbox = function(src){

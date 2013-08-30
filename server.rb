@@ -28,10 +28,20 @@ get '/' do
 	erb :index
 end
 
-['/login', '/projects'].each do |route|
-	get route do
-		erb route.to_sym
-	end
+# ['/login', '/projects'].each do |route|
+# 	get route do
+# 		erb route.to_sym
+# 	end
+# end
+get '/login' do
+	erb :login
+end
+
+get '/projects' do 
+	@projects = Video.all
+	@tags = []
+	@tags = @projects.collect { |proj| proj.tags.split(', ')}.flatten.uniq
+	erb :projects
 end
 
 ['/about', '/resume', '/contact'].each do |route|
