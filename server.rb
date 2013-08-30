@@ -77,14 +77,15 @@ namespace '/admin' do
 			redirect '/admin'
 		end
 	end
-
+	#IS THIS THE RIGHT WAY TO DO THIS?
 	get '' do
 		erb :'admin/index'
 	end
 
-#PUT ALL THIS IN A PROJECTS NAMESPACE
+#PUT ALL THIS IN A PROJECTS NAMESPACE also find where to change href="<%= .. %>"
 	get '/projects/:id/edit' do
 		@project = Video.get(params[:id])
+		erb :'admin/edit'
 	end
 	get '/projects' do
 		@projects = Video.all
@@ -94,8 +95,17 @@ namespace '/admin' do
 		erb :'admin/new'
 	end
 	post '/projects/new' do
-		Video.create(title: params[:title], url: params[:url], description: params[:description])
+		Video.create(
+			title: params[:title], 
+			url: params[:url], 
+			#img_url logic
+			description: params[:description]
+		)
 		redirect '/projects'
+	end
+	delete '/projects/:id' do
+		Video.get(params[:id]).destroy
+		redirect '/admin/projects'
 	end
 end
 

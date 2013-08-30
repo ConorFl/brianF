@@ -1,4 +1,15 @@
 <legend>
 <h2>New Video</h2>
 </legend>
-<%= erb :'admin/video_form', :layout => false %>
+<form method='post' action=<%= '/admin/projects/new' %> >
+<label>Title</label>
+<input type='text' name='title' placeholder='Kitten Playing With Yarn'>
+<label>URL</label>
+<input type='text' name='url' placeholder='http://www.youtube.com/kitty'>
+<label>Description</label>
+<textarea rows="4" name='description'></textarea>
+<label>Tags (separate by commas)</label>
+<input type="text" name='tags' placeholder="Adobe, Finalcut, ..."><br>
+<input type="submit" value="Save" class="btn btn-primary">
+<a href='/admin' class="btn">Cancel</a>
+</form>

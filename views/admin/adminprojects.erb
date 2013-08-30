@@ -1,119 +1,32 @@
-<script src="/js/jquery.prettyPhoto.js"></script>
-<link href="/css/prettyPhoto.css" rel="stylesheet" />
 <legend>
-	<h2>Projects</h2>
+	<h2>Edit Projects</h2>
 </legend>
-<!-- TAGS LIST SHOULD UPDATE DYNAMICALLY -->
-<ul class="unstyled inline project-techs">
-	<li class="active-tech"><a href="#">all</a></li>
-	<li class="inactive-tech"><a href="#">adobe</li>
-	<li class="inactive-tech"><a href="#">finalcut</a></li>
-	<li class="inactive-tech"><a href="#">editting</a></li>
-</ul>
 <br>
 
-<a href='/admin/projects/new' class='btn btn-primary'>Add New Video</a><br>
+<a href='/admin/projects/new' class='btn btn-primary'>Add New Video</a><br><br>
+
 <ul class="media-list">
 	<% @projects.each do |proj| %>
-	<li class="media all adobe photoshop" data-src='youtube.com'>
-		<a class="pull-left" rel="prettyPhoto" href= <%= proj.url %> >
-			<img class="media-object" src=<%= proj.img_url %> >
+	<li class="media">
+		<a class="pull-left" href="projects/<%= proj.id %>/edit" >
+			<!-- Look into changing the size of the image to avoid gsub -->
+			<img class="media-object" src=<%= proj.img_url.gsub('/0.jpg','/1.jpg') %> >
 		</a>
 		<div class="media-body">
 			<h3 class="media-heading">
-				<a rel="prettyPhoto" href=<%= proj.url %> >Video 1</a>
+				<a href="projects/<%= proj.id %>/edit" ><%= proj.title %></a>
+				<form action="projects/<%= proj.id %>" method="post">
+					<input type="hidden" name="_method" value="delete" />
+					<input type="submit" value="Delete" class="btn btn-danger pull-right">
+				</form>
 			</h3>
 			<%= proj.description %>
 			<div>
 				<% proj.tags.split(',').each do |tag| %>
 				<span class="label label-info"><%= tag %></span>
 				<% end %>
-<!-- 				<span class="label label-info">adobe</span>
-				<span class="label label-info">photoshop</span> -->
 			</div>
 		</div>
 	</li>
-
 	<% end %>
-	<li class="media all adobe photoshop" data-src='youtube.com'>
-		<a class="pull-left" rel="prettyPhoto" href='http://www.youtube.com/watch?v=eiHXASgRTcA'>
-			<img class="media-object" src="http://img.youtube.com/vi/i1PxI69r69Y/0.jpg">
-		</a>
-		<div class="media-body">
-			<h3 class="media-heading">
-				<a rel="prettyPhoto" href='http://www.youtube.com/watch?v=eiHXASgRTcA'>Video 1</a>
-			</h3>
-			In this video I produced for my class, I utilized Adobe and blah, blah, blah.
-			<div>
-				<span class="label label-info">adobe</span>
-				<span class="label label-info">photoshop</span>
-			</div>
-		</div>
-	</li>
-	<li class="media all adobe finalcut" data-src='youtube.com'>
-		<a class="pull-left" rel="prettyPhoto" href='http://www.youtube.com/watch?v=eiHXASgRTcA'>
-			<img class="media-object" src="http://img.youtube.com/vi/i1PxI69r69Y/0.jpg">
-		</a>
-		<div class="media-body">
-			<h3 class="media-heading"><a rel="prettyPhoto" href='http://www.youtube.com/watch?v=eiHXASgRTcA'>Another video</a></h3>
-			In this video I produced for my class, I utilized Adobe and blah, blah, blah.
-			<div>
-				<span class="label label-info">adobe</span>
-				<span class="label label-info">finalcut</span>
-			</div>
-		</div>
-	</li>
-	<li class="media all adobe editting" data-src='youtube.com'>
-		<a class="pull-left" rel="prettyPhoto" href='http://www.youtube.com/watch?v=eiHXASgRTcA'>
-			<img class="media-object" src="http://img.youtube.com/vi/i1PxI69r69Y/0.jpg">
-		</a>
-		<div class="media-body">
-			<h3 class="media-heading"><a rel="prettyPhoto" href='http://www.youtube.com/watch?v=eiHXASgRTcA'>One more video</a></h3>
-			In this video I produced for my class, I utilized Adobe and blah, blah, blah.
-			<div>
-				<span class="label label-info">adobe</span>
-				<span class="label label-info">editting</span>
-			</div>
-		</div>
-	</li>
-	<li class="media all finalcut editting" data-src='youtube.com'>
-		<a class="pull-left" rel="prettyPhoto" href='http://www.youtube.com/watch?v=eiHXASgRTcA'>
-			<img class="media-object" src="http://img.youtube.com/vi/i1PxI69r69Y/0.jpg">
-		</a>
-		<div class="media-body">
-			<h3 class="media-heading"><a rel="prettyPhoto" href='http://www.youtube.com/watch?v=eiHXASgRTcA'>In this video</a></h3>
-			In this video I produced for my class, I utilized Adobe and blah, blah, blah.
-			<div>
-				<span class="label label-info">finalcut</span>
-				<span class="label label-info">editting</span>
-			</div>
-		</div>
-	</li>
 </ul>
-<script>
-	$('.project-techs').on('click','li',function(e){
-		e.preventDefault();
-		if($(this).hasClass('inactive-tech')){
-			toggleVideos($(this));
-		}
-	})
-	// $('.media-object, .media-heading a').on('click', function(e){
-	// 	e.preventDefault();
-	// 	showLightbox($(this).closest('li').data('src'));
-	// })
-var toggleVideos = function(that){
-			//Toggle active/inactive style on links.
-			$('.active-tech').removeClass('active-tech').addClass('inactive-tech');
-			that.addClass('active-tech');
-			//Toggle videos displayed.
-			$('.media:visible').fadeOut(function(){
-				$("."+that.text()).fadeIn();
-			});		
-		}
-		var showLightbox = function(src){
-			console.log(src);
-		}
-		$(document).ready(function(){
-			$("a[rel^='prettyPhoto']").prettyPhoto();
-		});
-	</script>
