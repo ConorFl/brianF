@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Brian Flanagan</title>
+	<link rel = "stylesheet" type = "text/css" href="/css/bootstrap.min.css">
+	<link rel = "stylesheet" type = "text/css" href="/css/personal.css">
+	<script src="/js/jquery-1.10.1.min.js"></script>
+	<script src="/js/jquery-ui.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+</head>
+<div class="navbar navbar-inverse navbar-fixed-top">
+	<div class="navbar-inner">
+		<div class="container">
+			<a href="/" class="brand">Brian Flanagan</a>
+			<% if session['loggedIn'] %>
+			<ul class="nav pull-left admin">
+				<li><a href="/admin">Admin Dashboard</a></li>
+				<li><a href="/logout">Logout</a></li>
+			</ul>
+			<% end %>		
+			<ul class="nav pull-right">
+				<li><a href="/about">About</a></li>
+				<li><a href="/projects">Projects</a></li>
+				<li><a href="/resume">Resume</a></li>
+				<li><a href="/contact">Contact</a></li>
+			</ul>		
+		</div>
+	</div>
+</div>
+<br><br><br><br><br>
+<div class='container'>
+	<div class='hero-unit'>
+		<%= yield %>
+	</div>
+</div>
+<script>
+	// $(function(){
+	// 	var subPagesLoaded = false;
+	// 	var subPagesContent = {};
+	// 	var mainHeroUnit = $('.hero-unit');
+	// 	subPagesContent['/'] = mainHeroUnit.html()
+	// 	;		var otherStuff = $.ajax({
+	// 		url: '/otherstuff',
+	// 		dataType: 'json'
+	// 	}).done(function(data){
+	// 		prepSubPages(data);
+	// 	})
+		// //event handlers need to be reattached!!!!!
+		// $('.navbar ab').on('click', function(e){
+		// 	e.preventDefault();
+		// 	var link = $(this).attr('href');
+		// 	if(subPagesLoaded){
+		// 		mainHeroUnit.animate({color: '#eee'}, 500, function(){
+		// 			mainHeroUnit.html(subPagesContent[link]).promise().done( function(){
+		// 				mainHeroUnit.animate({color: 'rgb(51,51,51)'}, 500);
+		// 			})
+		// 		});
+		// 	}else{
+		// 		//spinner gif
+		// 	}
+		// })
+		// var prepSubPages = function(data){
+		// 	subPagesLoaded = true;
+		// 	$.each(data, function(heading, content){
+		// 		subPagesContent['/'+heading] = "<legend>"+heading+"</legend><p>"+content+"</p>";
+		// 	})
+		// 	console.log(subPagesContent);
+		// }
+	// })
+</script>
+</html>

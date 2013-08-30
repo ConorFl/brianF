@@ -1,0 +1,13 @@
+.active-tech a {
+	color: rgb(51,51,51)
+}
+a:hover {
+	text-decoration: none;
+}
+
+.project-techs {
+	 text-align: center;
+}
+.navbar-inverse .admin > li > a, .admin {
+	color: red;
+}

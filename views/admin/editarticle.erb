@@ -1,0 +1,15 @@
+<legend>
+<h2>Update <%= @article.title %></h2>
+</legend>
+<% if @article.instructions %>
+	<div class="admin">
+	<%= @article.instructions %>
+	<br><br>
+	</div>
+	<% end %>
+<form method='post' action= <%='/admin/'+@article.title.downcase+'/edit'%> >
+<textarea rows="15" class="span8" name="content"><%= @article.content %></textarea>
+<br><br>
+<input type='submit' value="Save Changes" class="btn btn-primary">
+<a class="btn" href='/admin'>Cancel</a>
+</form>
