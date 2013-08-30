@@ -83,30 +83,44 @@ namespace '/admin' do
 	end
 
 #PUT ALL THIS IN A PROJECTS NAMESPACE also find where to change href="<%= .. %>"
-	get '/projects/:id/edit' do
-		@project = Video.get(params[:id])
-		erb :'admin/edit'
-	end
-	get '/projects' do
-		@projects = Video.all
-		erb :'admin/adminprojects'
-	end
-	get '/projects/new' do
-		erb :'admin/new'
-	end
-	post '/projects/new' do
-		Video.create(
-			title: params[:title], 
-			url: params[:url], 
-			#img_url logic
-			description: params[:description]
+get '/projects/:id/edit' do
+	@project = Video.get(params[:id])
+	erb :'admin/edit'
+end
+get '/projects' do
+	@projects = Video.all
+	erb :'admin/adminprojects'
+end
+get '/projects/new' do
+	erb :'admin/new'
+end
+post '/projects/new' do
+	Video.create(
+		title: params[:title], 
+		url: params[:url], 
+			#move to helper
+			img_url: "http://img.youtube.com/vi/"+params[:url][/(watch\?v=)(.{11})/,2]+"/0.jpg",
+			description: params[:description],
+			tags: params[:tags]
+			)
+	redirect '/projects'
+end
+put '/projects/:id' do
+	Video.get(params[:id]).update(
+		title: params[:title], 
+		url: params[:url], 
+		#move to helper
+		img_url: "http://img.youtube.com/vi/"+params[:url][/(watch\?v=)(.{11})/,2]+"/0.jpg",
+		description: params[:description],
+		tags: params[:tags]
 		)
-		redirect '/projects'
-	end
-	delete '/projects/:id' do
-		Video.get(params[:id]).destroy
-		redirect '/admin/projects'
-	end
+	redirect '/admin/projects'
+end
+
+delete '/projects/:id' do
+	Video.get(params[:id]).destroy
+	redirect '/admin/projects'
+end
 end
 
 	# get '/admin' do
