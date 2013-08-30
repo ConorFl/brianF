@@ -79,10 +79,10 @@ namespace '/admin' do
 	end
 
 	get '' do
-		puts "FOUDN ITTTT"
 		erb :'admin/index'
 	end
 
+#PUT ALL THIS IN A PROJECTS NAMESPACE
 	get '/projects/:id/edit' do
 		@project = Video.get(params[:id])
 	end
