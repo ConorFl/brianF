@@ -65,7 +65,7 @@ end
 # end
 
 namespace '/admin' do
-	# before { redirect '/login' unless session['loggedIn']}
+	before { redirect '/login' unless session['loggedIn']}
 	['/welcome/edit', '/about/edit', '/resume/edit', '/contact/edit'].each do |route|
 		get route do 
 			@article = Article.first(title: route[1,route.index('/edit')-1].capitalize)
@@ -73,10 +73,16 @@ namespace '/admin' do
 		end
 		post route do
 			@article = Article.first(title: route[1,route.index('/edit')-1].capitalize)
-			@article.update(content: params[:content].gsub(/\r\n?/,'*newline*'))
+			@article.update(content: params[:content])
 			redirect '/admin'
 		end
 	end
+
+	get '' do
+		puts "FOUDN ITTTT"
+		erb :'admin/index'
+	end
+
 	get '/projects/:id/edit' do
 		@project = Video.get(params[:id])
 	end
@@ -93,6 +99,9 @@ namespace '/admin' do
 	end
 end
 
+	# get '/admin' do
+	# 	erb :'admin/index'
+	# end
 
 # get '/admin/video/new' do
 # 	erb :new
