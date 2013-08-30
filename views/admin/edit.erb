@@ -10,7 +10,7 @@
 <label>Description</label>
 <textarea rows="4" name='description'><%= @project.description %></textarea>
 <label>Tags (separate by commas)</label>
-<input type="text" name='tags' placeholder="Adobe, Finalcut, ..." value=<%= @project.tags %> ><br>
+<input type="text" name='tags' placeholder="Adobe, Finalcut, ..." value="<%= @project.tags %>" ><br>
 <input type="submit" value="Save" class="btn btn-primary">
 <a href='/admin/projects' class="btn">Cancel</a>
 </form>
