@@ -29,7 +29,7 @@ DataMapper.finalize.auto_upgrade!
 get '/?' do 
 	erb :index
 end
-
+#
 # ['/login', '/projects'].each do |route|
 # 	get route do
 # 		erb route.to_sym
