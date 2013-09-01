@@ -1,8 +1,7 @@
 require 'sinatra'
 require 'sinatra/namespace'
 require 'data_mapper'
-#helpers.rb is blank :(
-require_relative 'helpers.rb'
+require_relative 'helpers.rb' #this file is blank...
 enable :sessions
 
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/development.db")
@@ -23,6 +22,13 @@ class Video
 	property :img_url, String
 	property :description, Text
 	property :tags, 	String
+end
+
+class Contact
+	include DataMapper::Resource
+	property :id, Serial
+	property :icon, String
+	property :contact_info, String
 end
 DataMapper.finalize.auto_upgrade!
 
@@ -51,10 +57,20 @@ end
 	end
 end
 
-['/login', '/contact'].each do |route|
-	get route do 
-		erb route.to_sym
-	end
+# ['/login', '/contact'].each do |route|
+# 	get route do 
+# 		erb route.to_sym
+# 	end
+# end
+get '/login' do
+	erb :login
+end
+
+get '/contacts' do
+	@my_contacts = Contact.all
+	puts "*"*20
+	puts @my_contacts
+	erb :contacts
 end
 
 post '/login' do
@@ -89,9 +105,10 @@ namespace '/admin' do
 	get '/?' do
 		erb :'admin/index'
 	end
-	get '/contact/edit' do
+	get '/contacts' do
+		@my_contacts = Contact.all
 		@icons = Dir.entries('public/img/contact_icons') - [".",".."]
-		erb :'admin/contact'
+		erb :'admin/contacts'
 	end
 	#PUT ALL THIS IN A PROJECTS NAMESPACE also find where to change href="<%= .. %>"
 	get '/projects/:id/edit' do
@@ -131,6 +148,18 @@ namespace '/admin' do
 	delete '/projects/:id' do
 		Video.get(params[:id]).destroy
 		redirect '/admin/projects'
+	end
+	get '/contacts/:type/new' do
+		@type = params[:type]+"-48-black.png"
+		erb :'admin/newcontact'
+	end
+	post '/contacts/:type/new' do
+		Contact.create(icon: params[:type], contact_info: params[:contact])
+		redirect '/admin/contacts'
+	end
+	delete '/contacts/:id' do
+		Contact.get(params[:id]).destroy
+		redirect '/admin/contacts'
 	end
 end
 

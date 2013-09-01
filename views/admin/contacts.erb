@@ -1,0 +1,35 @@
+<legend>
+	<h2>Edit Contacts</h2>
+</legend>
+<ul style='list-style-type: none;'>
+	<% @my_contacts.each do |contact| %>
+	<li>
+		<form style="display: inline;" action="contacts/<%=contact.id%>" method="post">
+			<input type="hidden" name="_method" value="delete" />
+			<input type="submit" value="&times;" class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Delete">
+		</form>
+		<!-- <a class="btn btn-danger" data-toggle="tooltip" data-placement="left" title="Delete">&times;</a> -->
+		<img src='/img/contact_icons/<%= contact.icon%>' >
+		<a href='#'><%= contact.contact_info %></a>
+	</li>
+	<% end %>
+</ul>
+<legend>
+	<h2>Add Contacts</h2>
+</legend>
+<% @icons.each do |icon| %>
+<button class='btn'>
+	<a href="contacts/<%= icon[/(^\w+)(\-)/,1] %>/new">
+	<img class='pull-left' src="/img/contact_icons/<%=icon%>"><br>
+	<%= icon[/(^\w+)(\-)/,1] %>
+	</a>
+</button>
+<% end %>
+<script>
+	$(document).on('mouseenter mouseleave', ".btn-danger", function () {
+		$(this).tooltip('toggle');
+	})
+// $(document).on('mouseleave', ".btn-danger", function () {
+//   $(this).tooltip('hide');
+// })
+</script>

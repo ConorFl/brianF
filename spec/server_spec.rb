@@ -20,6 +20,5 @@ describe "Brian Site" do
 		get '/about'
 		last_response.should be_ok
 	end
-
 	
 end

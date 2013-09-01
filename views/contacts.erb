@@ -1,0 +1,8 @@
+<legend>
+	<h2>Contacts</h2>
+</legend>
+<ul style='list-style-type: none;'>
+	<% @my_contacts.each do |contact| %>
+		<li><img src='/img/contact_icons/<%= contact.icon%>' ><a href='#'><%= contact.contact_info %></a></li>
+	<% end %>
+</ul>

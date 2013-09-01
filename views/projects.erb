@@ -17,7 +17,7 @@
 <ul class="media-list">
 	<% @projects.each do |proj| %>
 	<li class="media all <%= proj.tags.gsub(',','') %>">
-		<a class="pull-left" href=<%= proj.url %> rel="prettyPhoto" >
+		<a class="pull-left thumbnail" href=<%= proj.url %> rel="prettyPhoto" >
 			<!-- Look into changing the size of the image to avoid gsub -->
 			<img class="media-object" src=<%= proj.img_url %> >
 			<!-- Add 'watch' link here -->
