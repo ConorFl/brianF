@@ -6,6 +6,7 @@ enable :sessions
 
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/development.db")
 
+#WHERE SHOULD I PUT MY MODELS
 class Article
 	include DataMapper::Resource
 	property :id,		Serial
@@ -95,18 +96,15 @@ namespace '/admin' do
 		end
 		get('/new') { erb :'admin/new' }
 		post '/new' do
-			#NEED VALIDATATIONS
-			puts params.inspect
+			#NEED VALIDATATIONS ALSO WHERE DOES :capture COME FROM?
 			Video.create(params_fixer(params))
 			redirect '/projects'
 		end
 		get '/:id/edit' do
 			@project = Video.get(params[:id])
-			puts @project.inspect
 			erb :'admin/edit'
 		end
 		put '/:id/edit' do
-			puts params.inspect
 			Video.get(params[:id]).update(params_fixer(params))
 			redirect '/admin/projects'
 		end
