@@ -10,12 +10,15 @@ gem 'autotest-growl'
 gem 'autotest-fsevent'
 
 group :production do
-    gem "pg"
-    gem "dm-postgres-adapter"
+	gem "pg"
+	gem "dm-postgres-adapter"
 end
 
 group :development, :test do
-    gem "sqlite3"
-    gem "dm-sqlite-adapter"
+	gem 'capybara', :git => 'git://github.com/jnicklas/capybara.git'
+	gem 'rspec'
+	gem "sqlite3"
+	gem "dm-sqlite-adapter"
+	# gem "spec-helper"
 end
 #
