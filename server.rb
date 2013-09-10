@@ -1,44 +1,18 @@
 require 'sinatra'
 require 'sinatra/namespace'
 require 'data_mapper'
-require_relative 'helpers.rb' 
+require_relative 'helpers.rb'
+require_relative 'models/init' 
 enable :sessions
 
 DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/development.db")
-
-#WHERE SHOULD I PUT MY MODELS
-class Article
-	include DataMapper::Resource
-	property :id,		Serial
-	property :title,	String, :required => true
-	property :content, Text, :required => true
-	property :instructions, Text
-end
-
-class Video
-	include DataMapper::Resource
-	property :id,		Serial
-	property :title,	String, :required => true
-	property :url,		String, :required => true
-	property :img_url, String
-	property :description, Text
-	property :tags, 	String
-end
-
-class Contact
-	include DataMapper::Resource
-	property :id, Serial
-	property :icon, String
-	property :contact_info, String
-end
 DataMapper.finalize.auto_upgrade!
 
 #Public Routes
 get('/?') { erb :index }
 get '/projects' do 
 	@projects = Video.all
-	@tags = []
-	@tags = @projects.collect { |proj| proj.tags.split(', ')}.flatten.uniq
+	@tags = video_tags(@projects)
 	erb :projects
 end
 ['/about', '/resume'].each do |route|
