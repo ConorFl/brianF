@@ -27,7 +27,13 @@ get '/contacts' do
 end
 
 #Login Routes
-get('/login') { erb :login }
+get('/login') do
+	if logged_in? 
+		erb :'admin/index'
+	else
+		erb :login 
+	end
+end
 get('/logout') { logout! }
 post('/login') { authenticate! }
 
