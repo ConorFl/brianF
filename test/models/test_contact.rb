@@ -1,25 +1,17 @@
 require 'minitest_helper'
 require 'rubygems'
 
-class TestArticle < MiniTest::Test
-	def setup
-		@good_saved_article = Article.create(title: "Hi, I'm Brian", content: "Welcome to my site.")
-		@good_saved_article.save
-	end
-	def teardown
-		@good_saved_article.destroy
-	end
+class TestContact < MiniTest::Test
 	def test_fail
 		# flunk "Write tests!"
 		assert true
-		assert @good_saved_article.save
 	end
 
-	def test_article_wont_update_without_title_filled
-		refute @good_saved_article.update(title: nil)
+	def test_contact_wont_update_without_title_filled
+		# refute @good_saved_article.update(title: nil)
 	end
 	def test_article_wont_update_without_content_filled
-		refute @good_saved_article.update(content: nil)
+		# refute @good_saved_article.update(content: nil)
 	end
 	# def test_videos_with_bad_data_wont_save
 	# 	refute Video.create().save

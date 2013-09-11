@@ -13,7 +13,6 @@ class Video
 		self.description = args[:description]
 		self.tags = args[:tags]
 		self.img_url = Video.url_to_img_url(self.url)
-		puts self.inspect
 	end
 
 	def self.url_to_img_url url
