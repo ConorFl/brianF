@@ -18,7 +18,7 @@ class TestVideo < MiniTest::Test
 	def test_url_to_img_url_returns_nil_for_bad_urls
 		refute Video.url_to_img_url("www.google.com")
 		refute Video.url_to_img_url("foobar")
-		assert Video.url_to_img_url("youtube.com")
+		refute Video.url_to_img_url("youtube.com")
 	end
 
 	def test_url_to_img_url_returns_nil_for_good_urls
