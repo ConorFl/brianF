@@ -144,7 +144,7 @@ DEPENDENCIES
   pg
   rack
   rack-test
-  sinatra (= 1.1.0)
+  sinatra
   sinatra-namespace
   sqlite3
   turn
