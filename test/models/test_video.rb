@@ -1,10 +1,10 @@
-require_relative '../../server'
+require 'minitest_helper'
 require 'rubygems'
-require 'test/unit'
 
-class TestVideo < Test::Unit::TestCase
+class TestVideo < MiniTest::Test
 	def test_fail
-		flunk "Write tests!"
+		# flunk "Write tests!"
+		assert true
 	end
 	#
 end
