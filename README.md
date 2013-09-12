@@ -9,6 +9,8 @@ Most of the basic functionality is done.  My goal has been to just have somethin
 
 Future plans
 ======
+- Figure out those "Rack::Session::Cookie" security warnings.
+- Deal with that jquery min.map console error.
 - Tests (Capybara).
 - Switch to mustache templates.
 - Change design after getting feedback (currently, it's raw Bootstrap).
