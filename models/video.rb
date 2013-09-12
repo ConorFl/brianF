@@ -16,10 +16,6 @@ class Video
 	end
 
 	def self.url_to_img_url url
-		begin
-			"http://img.youtube.com/vi/"+url[/(watch\?v=)(.{11})/,2]+"/0.jpg"
-		rescue
-			nil
-		end
+		"http://img.youtube.com/vi/"+url[/(watch\?v=)(.{11})/,2]+"/0.jpg" rescue nil
 	end
 end
