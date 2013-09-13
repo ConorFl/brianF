@@ -97,6 +97,7 @@ GEM
     mini_portile (0.5.1)
     minitest (5.0.7)
     multi_json (1.7.9)
+    mustache (0.99.4)
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
     pg (0.16.0)
@@ -112,6 +113,8 @@ GEM
       ffi (>= 0.5.0)
     rb-kqueue (0.2.0)
       ffi (>= 0.5.0)
+    shotgun (0.9)
+      rack (>= 1.0)
     sinatra (1.1.0)
       rack (~> 1.1)
       tilt (~> 1.1)
@@ -141,9 +144,11 @@ DEPENDENCIES
   guard-minitest
   guard-test
   minitest
+  mustache
   pg
   rack
   rack-test
+  shotgun
   sinatra
   sinatra-namespace
   sqlite3
