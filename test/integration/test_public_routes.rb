@@ -1,14 +1,10 @@
-ENV['RACK_ENV'] = 'test'
-
 require 'capybara_helper'
-require 'rubygems'
-require 'capybara'
 
 class TestPublicRoutes < MiniTest::Test
 	include Capybara::DSL
 
 	def setup
-		Capybara.app = Sinatra::Application.new
+		Capybara.app = Server
 	end
 	def teardown
 		Capybara.reset_sessions!

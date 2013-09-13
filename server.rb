@@ -3,6 +3,8 @@ require 'sinatra/base'
 #TRY SINATRA/BAWSR
 require 'sinatra/namespace'
 require 'data_mapper'
+#MUSTACHE ADD-ON
+require 'mustache/sinatra'
 require_relative 'helpers.rb'
 require_relative 'models/init'
 
@@ -47,7 +49,7 @@ class Server < Sinatra::Base
 	namespace '/admin' do
 		before do
 			redirect '/login' unless logged_in?
-			puts params.inspect
+			# puts params.inspect
 		end
 		get('/?') { erb :'admin/index' }
 		['/welcome/edit', '/about/edit', '/resume/edit'].each do |route|
@@ -75,7 +77,7 @@ class Server < Sinatra::Base
 				redirect '/admin/contacts'
 			else
 				@message = "Contacts must have an link, email, etc."
-				puts "IN HERE"
+				# puts "IN HERE"
 				redirect back
 			end
 		end
@@ -112,8 +114,8 @@ class Server < Sinatra::Base
 
 	#404
 	not_found do
-		puts "**"*30
-		puts "MESSAGE: #{@message}"
+		# puts "**"*30
+		# puts "MESSAGE: #{@message}"
 		"<h3>Maybe your best course would be to tread lightly.</h3>"
 	end
 end

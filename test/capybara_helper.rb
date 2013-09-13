@@ -9,4 +9,10 @@
 #   #   Capybara.use_default_driver
 #   # end
 # end
+ENV['RACK_ENV'] = 'test'
+
+require 'rubygems'
+require 'capybara'
+
 require_relative '../server.rb'
+# Capybara.app = Server

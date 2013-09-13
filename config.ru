@@ -1,2 +1,2 @@
 require './server'
-run Server.new
+run Server
