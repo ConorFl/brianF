@@ -1,4 +1,4 @@
-helpers do
+module AppHelper
 	#session helpers
 	def login!
 		session[:loggedIn] = true
@@ -29,10 +29,12 @@ helpers do
 	def to_title route
 		route[1,route.index('/edit')-1].capitalize
 	end
+
 	#For Contact icons
 	def to_png type
 		type+"-48-black.png"
 	end
+	
 	# Removes _method param that was added to form to make put/delete work.
 	def params_fixer params
 		#where does :captures come from??
