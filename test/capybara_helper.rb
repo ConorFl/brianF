@@ -15,4 +15,4 @@ require 'rubygems'
 require 'capybara'
 
 require_relative '../server.rb'
-# Capybara.app = Server
+# Capybara.app = App

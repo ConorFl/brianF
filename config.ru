@@ -1,2 +1,2 @@
 require './server'
-run Server
+run App

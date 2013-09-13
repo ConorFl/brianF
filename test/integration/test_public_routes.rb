@@ -4,7 +4,7 @@ class TestPublicRoutes < MiniTest::Test
 	include Capybara::DSL
 
 	def setup
-		Capybara.app = Server
+		Capybara.app = App
 	end
 	def teardown
 		Capybara.reset_sessions!

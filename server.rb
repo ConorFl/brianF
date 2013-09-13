@@ -5,10 +5,11 @@ require 'sinatra/namespace'
 require 'data_mapper'
 #MUSTACHE ADD-ON
 require 'mustache/sinatra'
-require_relative 'helpers.rb'
-require_relative 'models/init'
+require  './helpers.rb'
+require './models/init'
 
-class Server < Sinatra::Base
+class App < Sinatra::Base
+	register Mustache::Sinatra
 	register Sinatra::Namespace
 	helpers AppHelper
 	enable :sessions
