@@ -1,0 +1,61 @@
+<script src="/js/jquery.prettyPhoto.js"></script>
+<link href="/css/prettyPhoto.css" rel="stylesheet" />
+<legend>
+	<h2>Projects</h2>
+</legend>
+
+<ul class="unstyled inline project-techs">
+	<li class="active-tech"><a href="#">All</a></li>
+	{{#tags}}
+	<li class="inactive-tech"><a href="#">{{.}}</a></li>
+	{{/tags}}
+</ul>
+<br>
+<ul class="media-list">
+	{{#projects}}
+	<li class="media All {{tags_string}}">
+		<a class="pull-left thumbnail" href={{url}} rel="prettyPhoto" >
+			<!-- Look into changing the size of the image to avoid gsub -->
+			<img class="media-object" src={{img_url}} >
+			<!-- Add 'watch' link here -->
+		</a>
+		<div class="media-body">
+			<h3 class="media-heading">
+				<a href={{url}} rel="prettyPhoto" >{{title}}</a>
+			</h3>
+			{{description}}
+			<div>
+				{{#tags}}
+					<span class="label label-info">{{.}}</span>
+				{{/tags}}
+			</div>
+		</div>
+	</li>
+	{{/projects}}
+</ul>
+
+<script>
+	$('.project-techs').on('click','li',function(e){
+		e.preventDefault();
+		if($(this).hasClass('inactive-tech')){
+			toggleVideos($(this));
+		}
+	})
+	var toggleVideos = function(that){
+			//Toggle active/inactive style on links.
+			$('.active-tech').removeClass('active-tech').addClass('inactive-tech');
+			console.log("active-class being added to "+that.text())
+			that.addClass('active-tech');
+			//Toggle videos displayed.
+			$('.media:visible').fadeOut(function(){
+				console.log("fadin in ."+that.text().replace(" "," ."))
+				$("."+that.text().replace(" ",".")).fadeIn();
+			});		
+		}
+		var showLightbox = function(src){
+			console.log(src);
+		}
+		$(document).ready(function(){
+			$("a[rel^='prettyPhoto']").prettyPhoto();
+		});
+	</script>

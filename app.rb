@@ -28,17 +28,20 @@ class App < Sinatra::Base
 	get '/projects' do 
 		@projects = Video.all
 		@tags = video_tags(@projects)
-		erb :projects
+		# erb :projects
+		mustache :projects
 	end
 	['/about', '/resume'].each do |route|
 		get route do 
 			@article = Article.first(title: route[1,10].capitalize)
-			erb :show
+			# erb :show
+			mustache :show
 		end
 	end
 	get '/contacts' do
-		@my_contacts = Contact.all
-		erb :contacts
+		@contacts = Contact.all
+		# erb :contacts
+		mustache :contacts
 	end
 
 	#Login Routes
@@ -46,7 +49,8 @@ class App < Sinatra::Base
 		if logged_in? 
 			erb :'admin/index'
 		else
-			erb :login 
+			# erb :login 
+			mustache :login
 		end
 	end
 	get('/logout') { logout! }
@@ -68,7 +72,7 @@ class App < Sinatra::Base
 			end
 		end
 		get '/contacts' do
-			@my_contacts = Contact.all
+			@contacts = Contact.all
 			@icons = Dir.entries('public/img/contact_icons') - [".",".."]
 			erb :'admin/contacts'
 		end
