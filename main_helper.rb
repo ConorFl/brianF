@@ -1,7 +1,7 @@
-# require 'sinatra/base'
+require 'sinatra/base'
 
-# module Sinatra
-	module AppHelper
+module Sinatra
+	module MainHelper
 		#session helpers
 		def login!
 			session[:loggedIn] = true
@@ -47,5 +47,5 @@
 		end
 	end
 
-	# register AppHelper
-# end
+	helpers MainHelper
+end

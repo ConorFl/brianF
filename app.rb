@@ -1,21 +1,27 @@
 require 'sinatra/base'
+# require 'sinatra'
+#TRY SINATRA/BAWSR
 require 'sinatra/namespace'
 require 'data_mapper'
+#MUSTACHE ADD-ON
 require 'mustache/sinatra'
-require  './helpers.rb'
 require './models/init'
+require  './main_helper'
 
 class App < Sinatra::Base
+	require './mustViews/layout'
 	register Mustache::Sinatra
 	register Sinatra::Namespace
-	helpers AppHelper
-	require './mustViews/layout'
+	helpers Sinatra::MainHelper
 	enable :sessions
 
 	set :mustache, { views: './mustViews', templates: './mustTemplates'}
 
 	DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/development.db")
 	DataMapper.finalize.auto_upgrade!
+
+	#HACK TO PASS SESSION TO MUSTACHE VIEWS
+	before { @session = session }
 
 	#Public Routes
 	get('/?') { mustache :index }
@@ -48,10 +54,8 @@ class App < Sinatra::Base
 
 	#/admin Routes/Namespace
 	namespace '/admin' do
-		before do
-			redirect '/login' unless logged_in?
-			# puts params.inspect
-		end
+		before { redirect '/login' unless logged_in? }
+
 		get('/?') { erb :'admin/index' }
 		['/welcome/edit', '/about/edit', '/resume/edit'].each do |route|
 			get route do 

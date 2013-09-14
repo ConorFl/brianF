@@ -1,10 +1,9 @@
-class App
+class App < Sinatra::Base
+	enable :sessions
 	module Views
 		class Layout < Mustache
-			include AppHelper
 			def admin
-				logged_in?
-				true
+				@session[:loggedIn]
 			end
 		end
 	end
