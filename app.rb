@@ -120,6 +120,7 @@ class App < Sinatra::Base
 			get '/:id/edit' do
 				@project = Video.get(params[:id])
 				erb :'admin/edit'
+				mustache :admin_edit
 			end
 			#this was a put but it stopped working possibly while moving to mustache.
 			post '/:id/edit' do

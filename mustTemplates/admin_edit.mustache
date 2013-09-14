@@ -1,0 +1,18 @@
+<legend>
+<h2>Edit Video</h2>
+</legend>
+{{#project}}
+<form action="/admin/projects/{{id}}/edit" method="post">
+<input name="_method" type="hidden" value="put" />
+<label>Title</label>
+<input type='text' name='title' placeholder='Kitten Playing With Yarn' value="{{title}}" >
+<label>URL</label>
+<input type='text' name='url' placeholder='http://www.youtube.com/kitty' value = "{{url}}">
+<label>Description</label>
+<textarea rows="4" name='description'>{{description}}</textarea>
+<label>Tags (separate by commas)</label>
+<input type="text" name='tags' placeholder="Adobe, Finalcut, ..." value="{{tags}}" ><br>
+<input type="submit" value="Save" class="btn btn-primary">
+<a href='/admin/projects' class="btn">Cancel</a>
+</form>
+{{/project}}
