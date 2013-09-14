@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Brian Flanagan</title>
+	<link rel = "stylesheet" type = "text/css" href="/css/bootstrap.min.css">
+	<link rel = "stylesheet" type = "text/css" href="/css/personal.css">
+	<script src="/js/jquery-1.10.1.min.js"></script>
+	<script src="/js/jquery-ui.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+</head>
+<div class="navbar navbar-inverse navbar-fixed-top">
+	<div class="navbar-inner">
+		<div class="container">
+			<a href="/" class="brand">Brian Flanagan</a>
+			<!-- if session['loggedIn'] -->
+			{{#admin}}
+			<ul class="nav pull-left admin">
+				<li><a href="/admin">Admin Dashboard</a></li>
+				<li><a href="/logout">Logout</a></li>
+			</ul>
+			{{/admin}}		
+			<ul class="nav pull-right">
+				<li><a href="/about">About</a></li>
+				<li><a href="/projects">Projects</a></li>
+				<li><a href="/resume">Resume</a></li>
+				<li><a href="/contacts">Contacts</a></li>
+			</ul>		
+		</div>
+	</div>
+</div>
+<br><br><br><br><br>
+<div class='container'>
+	<div class='hero-unit'>
+		<!-- yield -->
+		{{{yield}}}
+	</div>
+</div>
+</html>

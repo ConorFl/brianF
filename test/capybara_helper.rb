@@ -14,5 +14,5 @@ ENV['RACK_ENV'] = 'test'
 require 'rubygems'
 require 'capybara'
 
-require_relative '../server.rb'
+require_relative '../app.rb'
 # Capybara.app = App

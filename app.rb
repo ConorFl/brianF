@@ -11,14 +11,17 @@ require './models/init'
 class App < Sinatra::Base
 	register Mustache::Sinatra
 	register Sinatra::Namespace
-	helpers AppHelper
+	helpers Sinatra::AppHelper
+	require './mustViews/layout'
 	enable :sessions
+
+	set :mustache, { views: './mustViews', templates: './mustTemplates'}
 
 	DataMapper.setup(:default, ENV['DATABASE_URL'] || "sqlite3://#{Dir.pwd}/development.db")
 	DataMapper.finalize.auto_upgrade!
 
 	#Public Routes
-	get('/?') { erb :index }
+	get('/?') { mustache :index }
 	get '/projects' do 
 		@projects = Video.all
 		@tags = video_tags(@projects)

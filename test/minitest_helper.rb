@@ -1,4 +1,4 @@
-require_relative '../server.rb'
+require_relative '../app.rb'
 
 # Turn.config do |c|
 #  # use one of output formats:
