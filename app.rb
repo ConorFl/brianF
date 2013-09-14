@@ -80,8 +80,10 @@ class App < Sinatra::Base
 		end
 		get '/contacts' do
 			@contacts = Contact.all
-			@icons = Dir.entries('public/img/contact_icons') - [".",".."]
-			erb :'admin/contacts'
+							@icons = Dir.entries('public/img/contact_icons') - [".",".."]
+
+			# erb :'admin/contacts'
+			mustache :admin_contacts
 		end
 		get '/contacts/:type/new' do
 			@icon_filename = to_png(params[:type])
@@ -93,7 +95,6 @@ class App < Sinatra::Base
 				redirect '/admin/contacts'
 			else
 				@message = "Contacts must have an link, email, etc."
-				# puts "IN HERE"
 				redirect back
 			end
 		end
