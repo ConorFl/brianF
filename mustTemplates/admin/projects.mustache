@@ -1,0 +1,33 @@
+<legend>
+	<h2>Edit Projects</h2>
+</legend>
+<br>
+
+<a href='/admin/projects/new' class='btn btn-primary'>Add New Video</a><br><br>
+
+<ul class="media-list">
+	{{#projects}}
+	<li class="media">
+		<a class="pull-left" href="projects/{{id}}/edit" >
+			<!-- Look into changing the size of the image to avoid gsub -->
+			<img class="media-object" src= {{small_img_url}} >
+			<!-- Add 'watch' link here -->
+		</a>
+		<div class="media-body">
+			<h3 class="media-heading">
+				<a href="projects/{{id}}/edit" >{{title}}</a>
+				<form action="projects/{{id}}" method="post">
+					<input type="hidden" name="_method" value="delete" />
+					<input type="submit" value="Delete" class="btn btn-danger pull-right">
+				</form>
+			</h3>
+			{{description}}
+			<div>
+			{{#tags}}
+				<span class="label label-info">{{.}}</span>
+			{{/tags}}
+			</div>
+		</div>
+	</li>
+	{{/projects}}
+</ul>

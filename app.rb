@@ -21,7 +21,11 @@ class App < Sinatra::Base
 	DataMapper.finalize.auto_upgrade!
 
 	#HACK TO PASS SESSION TO MUSTACHE VIEWS
-	before { @session = session }
+	before do
+		@session = session
+		puts "*"*50
+		puts "being called from before do"
+	end
 
 	#Public Routes
 	get('/?') { mustache :index }
@@ -58,7 +62,10 @@ class App < Sinatra::Base
 
 	#/admin Routes/Namespace
 	namespace '/admin' do
-		before { redirect '/login' unless logged_in? }
+		before do
+			redirect '/login' unless logged_in?
+			require './mustViews/layout'
+		end
 
 		get('/?') { erb :'admin/index' }
 		['/welcome/edit', '/about/edit', '/resume/edit'].each do |route|
@@ -98,7 +105,10 @@ class App < Sinatra::Base
 		namespace '/projects' do
 			get '/?' do
 				@projects = Video.all
-				erb :'admin/adminprojects'
+				puts "*"*50
+				puts "@session in admin/projects/: #{@session.inspect}"
+				# erb :'admin/projects'
+				mustache :'admin/projects'
 			end
 			get('/new') { erb :'admin/new' }
 			post '/new' do
@@ -110,7 +120,8 @@ class App < Sinatra::Base
 				@project = Video.get(params[:id])
 				erb :'admin/edit'
 			end
-			put '/:id/edit' do
+			#this was a put but it stopped working possibly while moving to mustache.
+			post '/:id/edit' do
 				Video.get(params[:id]).update(params_fixer(params))
 				redirect '/admin/projects'
 			end
