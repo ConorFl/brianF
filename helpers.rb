@@ -1,6 +1,6 @@
-require 'sinatra/base'
+# require 'sinatra/base'
 
-module Sinatra
+# module Sinatra
 	module AppHelper
 		#session helpers
 		def login!
@@ -47,5 +47,5 @@ module Sinatra
 		end
 	end
 
-	helpers AppHelper
-end
+	# register AppHelper
+# end

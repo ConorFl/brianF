@@ -1,9 +1,6 @@
 require 'sinatra/base'
-# require 'sinatra'
-#TRY SINATRA/BAWSR
 require 'sinatra/namespace'
 require 'data_mapper'
-#MUSTACHE ADD-ON
 require 'mustache/sinatra'
 require  './helpers.rb'
 require './models/init'
@@ -11,7 +8,7 @@ require './models/init'
 class App < Sinatra::Base
 	register Mustache::Sinatra
 	register Sinatra::Namespace
-	helpers Sinatra::AppHelper
+	helpers AppHelper
 	require './mustViews/layout'
 	enable :sessions
 
