@@ -108,7 +108,7 @@ class App < Sinatra::Base
 				puts "*"*50
 				puts "@session in admin/projects/: #{@session.inspect}"
 				# erb :'admin/projects'
-				mustache :'admin/projects'
+				mustache :'admin_projects'
 			end
 			get('/new') { erb :'admin/new' }
 			post '/new' do
