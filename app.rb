@@ -66,7 +66,7 @@ class App < Sinatra::Base
 			require './mustViews/layout'
 		end
 
-		get('/?') { erb :'admin/index' }
+		get('/?') { mustache :admin_index }
 		['/welcome/edit', '/about/edit', '/resume/edit'].each do |route|
 			get route do 
 				@article = Article.first(title: to_title(route))
