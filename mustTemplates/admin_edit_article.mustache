@@ -1,0 +1,15 @@
+<legend>
+<h2>Update {{title}}</h2>
+</legend>
+{{#instructions}}
+	<div class="admin">
+	{{instructions}}
+	<br><br>
+	</div>
+	{{/instructions}}
+<form method='post' action='/admin/{{lowercase_title}}/edit' >
+<textarea rows="15" class="span8" name="content">{{content}}</textarea>
+<br><br>
+<input type='submit' value="Save Changes" class="btn btn-primary">
+<a class="btn" href='/admin'>Cancel</a>
+</form>

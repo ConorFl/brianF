@@ -1,7 +1,9 @@
 class App < Sinatra::Base
 	module Views
 		class Projects < Layout
-			def tags; @tags end
+			def tags
+				@projects.collect { |proj| proj.tags.split(', ')}.flatten.uniq
+			end
 			
 			def projects
 				projects = []
@@ -18,6 +20,7 @@ class App < Sinatra::Base
 				proj_hash[:tags] = proj_hash[:tags].split(', ')
 				proj_hash
 			end
+			# private_class_method :video_tags
 		end
 	end
 end

@@ -9,7 +9,7 @@ class App < Sinatra::Base
 				end
 				projects
 			end
-			puts "HEY EVEN I KNOW session= #{@session.inspect}"
+			# puts "HEY EVEN I KNOW session= #{@session.inspect}"
 			def proj_to_hash proj
 				proj_hash = proj.attributes
 				proj_hash[:small_img_url] = proj.img_url.gsub('/0.jpg','/1.jpg')

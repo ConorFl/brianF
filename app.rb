@@ -21,17 +21,16 @@ class App < Sinatra::Base
 	DataMapper.finalize.auto_upgrade!
 
 	#HACK TO PASS SESSION TO MUSTACHE VIEWS
-	before do
-		@session = session
-		puts "*"*50
-		puts "being called from before do"
-	end
+	before { @session = session	}
 
 	#Public Routes
-	get('/?') { mustache :index }
+	get('/?') do
+		@article = Article.first(title: "Welcome") 
+		mustache :show 
+		# erb :index
+	end
 	get '/projects' do 
 		@projects = Video.all
-		@tags = video_tags(@projects)
 		# erb :projects
 		mustache :projects
 	end
@@ -71,7 +70,8 @@ class App < Sinatra::Base
 		['/welcome/edit', '/about/edit', '/resume/edit'].each do |route|
 			get route do 
 				@article = Article.first(title: to_title(route))
-				erb :'/admin/editarticle'
+				mustache :admin_edit_article
+				# erb :'/admin/editarticle'
 			end
 			post route do
 				@article = Article.first(title: to_title(route)).update(content: params[:content])
@@ -80,7 +80,7 @@ class App < Sinatra::Base
 		end
 		get '/contacts' do
 			@contacts = Contact.all
-							@icons = Dir.entries('public/img/contact_icons') - [".",".."]
+			@icons = Dir.entries('public/img/contact_icons') - [".",".."]
 
 			# erb :'admin/contacts'
 			mustache :admin_contacts
@@ -107,10 +107,8 @@ class App < Sinatra::Base
 		namespace '/projects' do
 			get '/?' do
 				@projects = Video.all
-				puts "*"*50
-				puts "@session in admin/projects/: #{@session.inspect}"
 				# erb :'admin/projects'
-				mustache :'admin_projects'
+				mustache :admin_projects
 			end
 			get('/new') { erb :'admin/new' }
 			post '/new' do
@@ -128,6 +126,7 @@ class App < Sinatra::Base
 				Video.get(params[:id]).update(params_fixer(params))
 				redirect '/admin/projects'
 			end
+			#probably need to change to post since put/delete hack is broken.
 			delete '/:id' do
 				Video.get(params[:id]).destroy
 				redirect '/admin/projects'

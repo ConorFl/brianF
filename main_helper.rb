@@ -25,9 +25,6 @@ module Sinatra
 			end
 		end
 		#public route helpers
-		def video_tags projs
-			projs.collect { |proj| proj.tags.split(', ')}.flatten.uniq
-		end
 
 		def to_title route
 			route[1,route.index('/edit')-1].capitalize
