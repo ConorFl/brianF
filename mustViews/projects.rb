@@ -1,7 +1,5 @@
-		require './layout.rb'
 class App < Sinatra::Base
 	module Views
-		include Layout
 		class Projects < Layout
 			def tags; @tags end
 			

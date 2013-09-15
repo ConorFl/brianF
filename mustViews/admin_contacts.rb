@@ -13,8 +13,6 @@ class App < Sinatra::Base
 			def icons
 				icons = []
 				icon_files = Dir.entries('public/img/contact_icons') - [".",".."]
-				puts "*"*50
-				puts icon_files.inspect
 				icon_files.each do |icon|
 					icons.push({i_file: icon, i_name: icon[/(^\w+)(\-)/,1] })
 				end

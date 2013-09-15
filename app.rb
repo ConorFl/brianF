@@ -98,7 +98,8 @@ class App < Sinatra::Base
 				redirect back
 			end
 		end
-		delete '/contacts/:id' do
+		#SHOULD BE DELETE, BUT DELETE/PUT HACK STOPPED WORKING...
+		post '/contacts/:id' do
 			Contact.get(params[:id]).destroy
 			redirect '/admin/contacts'
 		end
