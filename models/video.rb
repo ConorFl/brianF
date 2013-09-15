@@ -8,10 +8,10 @@ class Video
 	property :tags, 	String
 
 	def initialize args
-		self.title = args[:title]
-		self.url = args[:url]
-		self.description = args[:description]
-		self.tags = args[:tags]
+		self.title = args["title"]
+		self.url = args["url"]
+		self.description = args["description"]
+		self.tags = args["tags"]
 		self.img_url = Video.url_to_img_url(self.url)
 	end
 

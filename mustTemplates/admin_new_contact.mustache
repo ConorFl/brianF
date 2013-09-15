@@ -1,0 +1,12 @@
+<legend>
+<h2>New Contact</h2>
+</legend>
+{{#error}}
+<div class="alert alert-error">{{error}}</div>
+{{/error}}
+<form method='post' action='/admin/contacts/{{icon_filename}}/new' >
+<img src="/img/contact_icons/{{icon_filename}}"><input type='text' name='contact' style='margin-bottom: 0;' styplaceholder='brianflanagan@somewhere.com'>
+<br><br>
+<input type="submit" value="Save" class="btn btn-primary">
+<a href='/admin/contacts' class="btn">Cancel</a>
+</form>

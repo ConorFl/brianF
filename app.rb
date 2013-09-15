@@ -86,15 +86,17 @@ class App < Sinatra::Base
 			mustache :admin_contacts
 		end
 		get '/contacts/:type/new' do
-			@icon_filename = to_png(params[:type])
-			erb :'admin/newcontact'
+			# @icon_filename = to_png(params[:type])
+			# erb :'admin/newcontact'
+			@params = params
+			mustache :admin_new_contact
 		end
 		post '/contacts/:icon_img/new' do
 			new_contact = Contact.create(icon: params[:icon_img], contact_info: params[:contact])
 			if new_contact.save
 				redirect '/admin/contacts'
 			else
-				@message = "Contacts must have an link, email, etc."
+				@error = "Contacts must have an link, email, etc."
 				redirect back
 			end
 		end
@@ -110,7 +112,7 @@ class App < Sinatra::Base
 				# erb :'admin/projects'
 				mustache :admin_projects
 			end
-			get('/new') { erb :'admin/new' }
+			get('/new') { mustache :admin_new }
 			post '/new' do
 				#NEED VALIDATATIONS ALSO WHERE DOES :capture COME FROM?
 				Video.create(params_fixer(params))
@@ -118,7 +120,7 @@ class App < Sinatra::Base
 			end
 			get '/:id/edit' do
 				@project = Video.get(params[:id])
-				erb :'admin/edit'
+				# erb :'admin/edit'
 				mustache :admin_edit
 			end
 			#this was a put but it stopped working possibly while moving to mustache.
@@ -126,8 +128,8 @@ class App < Sinatra::Base
 				Video.get(params[:id]).update(params_fixer(params))
 				redirect '/admin/projects'
 			end
-			#probably need to change to post since put/delete hack is broken.
-			delete '/:id' do
+			#should be delete, need to use post since put/delete hack is broken.
+			post '/:id' do
 				Video.get(params[:id]).destroy
 				redirect '/admin/projects'
 			end
