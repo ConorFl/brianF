@@ -48,23 +48,13 @@ class App < Sinatra::Base
 	end
 
 	#Login Routes
-	get('/login') do
-		if logged_in? 
-			erb :'admin/index'
-		else
-			# erb :login 
-			mustache :login
-		end
-	end
-	get('/logout') { logout! }
-	post('/login') { authenticate! }
+	get('/login') 	{ logged_in? ? (mustache :admin_index) : (mustache :login) }
+	post('/login') 	{ authenticate! }
+	get('/logout') 	{ logout! }
 
 	#/admin Routes/Namespace
 	namespace '/admin' do
-		before do
-			redirect '/login' unless logged_in?
-			require './mustViews/layout'
-		end
+		before { redirect '/login' unless logged_in? }
 
 		get('/?') { mustache :admin_index }
 		['/welcome/edit', '/about/edit', '/resume/edit'].each do |route|
@@ -81,14 +71,12 @@ class App < Sinatra::Base
 		get '/contacts' do
 			@contacts = Contact.all
 			@icons = Dir.entries('public/img/contact_icons') - [".",".."]
-
 			# erb :'admin/contacts'
 			mustache :admin_contacts
 		end
 		get '/contacts/:type/new' do
-			# @icon_filename = to_png(params[:type])
-			# erb :'admin/newcontact'
 			@params = params
+			# erb :'admin/newcontact'
 			mustache :admin_new_contact
 		end
 		post '/contacts/:icon_img/new' do
